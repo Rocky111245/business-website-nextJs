@@ -20,19 +20,19 @@ export default function GallerySection() {
 
     useEffect(() => {
         if (isHovered) return;
-        const id = setInterval(() => setCurrent((p) => (p + 1) % images.length), 4000);
+        const id = setInterval(() => setCurrent(p => (p + 1) % images.length), 4000);
         return () => clearInterval(id);
     }, [isHovered]);
 
-    const next = () => setCurrent((p) => (p + 1) % images.length);
-    const prev = () => setCurrent((p) => (p === 0 ? images.length - 1 : p - 1));
+    const next = () => setCurrent(p => (p + 1) % images.length);
+    const prev = () => setCurrent(p => (p === 0 ? images.length - 1 : p - 1));
 
     return (
-        <section className="bg-white py-16">
+        <section className="bg-gradient-to-b from-neutral-50 to-sky-50 py-16">
             <div className="section-container">
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold text-gray-800 mb-4">Over 40 Years of Experience in the Medical Industry</h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                    <h2 className="title-xl mb-4">Over 40 Years of Experience in the Medical Industry</h2>
+                    <p className="text-xl text-neutral-600 max-w-3xl mx-auto">
                         Partnering with leading healthcare institutions and professionals across Bangladesh
                     </p>
                 </div>
@@ -44,14 +44,11 @@ export default function GallerySection() {
                 >
                     <div className="relative h-[500px] md:h-[600px]">
                         {images.map((img, i) => (
-                            <div
-                                key={i}
-                                className={`absolute inset-0 transition-all duration-700 ${i === current ? "opacity-100 scale-100 z-10" : "opacity-0 scale-95 z-0"}`}
-                            >
+                            <div key={i} className={`absolute inset-0 transition-all duration-700 ${i === current ? "opacity-100 scale-100 z-10" : "opacity-0 scale-95 z-0"}`}>
                                 <div className="relative w-full h-full">
                                     <Image src={img.url} alt={img.caption} fill className="object-cover" />
                                 </div>
-                                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/80 to-transparent" />
+                                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-blue-900/80 to-transparent" />
                                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-20">
                                     <p className="text-lg md:text-xl font-semibold">{img.caption}</p>
                                 </div>
@@ -59,10 +56,18 @@ export default function GallerySection() {
                         ))}
                     </div>
 
-                    <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-gray-800 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 shadow-lg" aria-label="Previous image">
+                    <button
+                        onClick={prev}
+                        className="absolute left-4 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-blue-900 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 shadow-lg"
+                        aria-label="Previous image"
+                    >
                         <FaChevronLeft />
                     </button>
-                    <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-gray-800 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 shadow-lg" aria-label="Next image">
+                    <button
+                        onClick={next}
+                        className="absolute right-4 top-1/2 -translate-y-1/2 z-30 bg-white/90 hover:bg-white text-blue-900 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 opacity-0 group-hover:opacity-100 shadow-lg"
+                        aria-label="Next image"
+                    >
                         <FaChevronRight />
                     </button>
 
@@ -78,7 +83,7 @@ export default function GallerySection() {
                     </div>
                 </div>
 
-                <div className="text-center mt-6 text-gray-600">
+                <div className="text-center mt-6 text-neutral-600">
                     <span className="text-lg font-medium">{current + 1} / {images.length}</span>
                 </div>
             </div>

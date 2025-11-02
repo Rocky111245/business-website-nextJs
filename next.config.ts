@@ -1,20 +1,20 @@
+// next.config.ts
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     images: {
         remotePatterns: [
-            // ImageKit (already needed)
+            // your existing host(s)
             { protocol: "https", hostname: "ik.imagekit.io" },
 
-            // WordPress CDN variants that WP uses
+            // WordPress CDN variants (covers your URLs like https://i2.wp.com/...)
             { protocol: "https", hostname: "i0.wp.com" },
             { protocol: "https", hostname: "i1.wp.com" },
             { protocol: "https", hostname: "i2.wp.com" },
-
-            // (Optional) if you load directly from your WP site too:
-            { protocol: "https", hostname: "nts-bd.net" },
-            { protocol: "https", hostname: "www.nts-bd.net" },
+            // if you prefer a wildcard and your Next version supports it, you can use this instead of the 3 lines above:
+            // { protocol: "https", hostname: "*.wp.com" },
         ],
+        // formats: ["image/avif", "image/webp"], // optional
     },
 };
 

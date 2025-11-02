@@ -1,12 +1,12 @@
 // app/(site)/page.tsx
-import HeroSection from "@/app/components/home/HeroSection";
-import GallerySection from "@/app/components/home/GallerySection";
-import TrustedBrandsSection from "@/app/components/home/TrustedBrandsSection";
-import CategorySection from "@/app/components/home/CategorySection";
-import ServicesGrid from "@/app/components/home/ServicesGrid";
-import ProductShowcase from "@/app/components/home/ProductShowcase";
-import MissionVisionSection from "@/app/components/home/MissionVisionSection";
-import SubFooter from "@/app/components/SubFooter";
+import SubFooter from "./../components/SubFooter";
+import HeroSection from "./../components/home/HeroSection";
+import GallerySection from "./../components/home/GallerySection";
+import TrustedBrandsSection from "./../components/home/TrustedBrandsSection";
+import CategorySection from "./../components/home/CategorySection";
+import ServicesGrid from "./../components/home/ServicesGrid";
+import ProductShowcase from "./../components/home/ProductShowcase";
+import MissionVisionSection from "./../components/home/MissionVisionSection";
 
 export default function HomePage() {
     return (
