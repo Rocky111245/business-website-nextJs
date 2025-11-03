@@ -1,22 +1,21 @@
 @import "tailwindcss";
 
-/* --- Brand-first palette: deep blue with cyan accent, plus semantic hues --- */
 @theme {
-    /* Brand (Deep Blue) — primary */
-    --color-primary-50:  #eff6ff;
+    /* Primary - Deep Blue */
+    --color-primary-50: #eff6ff;
     --color-primary-100: #dbeafe;
     --color-primary-200: #bfdbfe;
     --color-primary-300: #93c5fd;
     --color-primary-400: #60a5fa;
-    --color-primary-500: #3b82f6; /* main interactive */
+    --color-primary-500: #3b82f6;
     --color-primary-600: #2563eb;
-    --color-primary-700: #1d4ed8; /* preferred CTA top */
-    --color-primary-800: #1e40af; /* “brand navy” */
-    --color-primary-900: #1e3a8a; /* headers/nav */
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
     --color-primary-950: #172554;
 
-    /* Accent (Cyan) — links/highlights */
-    --color-secondary-50:  #ecfeff;
+    /* Secondary - Cyan */
+    --color-secondary-50: #ecfeff;
     --color-secondary-100: #cffafe;
     --color-secondary-200: #a5f3fc;
     --color-secondary-300: #67e8f9;
@@ -27,8 +26,8 @@
     --color-secondary-800: #155e75;
     --color-secondary-900: #164e63;
 
-    /* Neutral (Slate) — surfaces/typography */
-    --color-neutral-50:  #f8fafc;
+    /* Neutral - Slate */
+    --color-neutral-50: #f8fafc;
     --color-neutral-100: #f1f5f9;
     --color-neutral-200: #e2e8f0;
     --color-neutral-300: #cbd5e1;
@@ -38,54 +37,10 @@
     --color-neutral-700: #334155;
     --color-neutral-800: #1e293b;
     --color-neutral-900: #0f172a;
-
-    /* Semantic helpers (used sparingly) */
-    --color-success-600:  #059669; /* emerald */
-    --color-warning-600:  #d97706; /* amber  */
-    --color-danger-600:   #e11d48; /* rose   */
-    --color-info-600:     #0284c7; /* sky    */
 }
 
-/* Base */
 @layer base {
-    html, body { @apply text-neutral-800 bg-neutral-50; }
-}
-
-/* Primitives */
-@layer utilities {
-    .section-container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
-
-    /* Primary CTA */
-    .btn-primary {
-        @apply inline-flex items-center justify-center
-        bg-gradient-to-r from-primary-700 to-primary-800
-        text-white font-semibold py-3 px-6 rounded-lg
-        transition-all duration-200 shadow-md hover:shadow-lg
-        hover:from-primary-800 hover:to-primary-900;
+    html {
+        @apply text-neutral-800 bg-neutral-50;
     }
-
-    /* Quiet / secondary */
-    .btn-quiet {
-        @apply inline-flex items-center justify-center
-        bg-white text-primary-800 border border-neutral-200
-        hover:bg-neutral-100 rounded-lg font-medium py-3 px-6
-        transition-colors;
-    }
-
-    /* Links */
-    .link {
-        @apply text-secondary-700 hover:text-secondary-800
-        underline decoration-2 underline-offset-4
-        hover:decoration-2;
-    }
-
-    /* Cards & titles */
-    .card     { @apply bg-white rounded-2xl shadow-lg border border-neutral-100; }
-    .title-xl { @apply text-4xl font-bold text-neutral-900; }
-    .title-lg { @apply text-2xl font-bold text-neutral-900; }
-
-    /* Subtle “success” pill (for status badges) */
-    .badge-success { @apply inline-block text-xs font-semibold px-2.5 py-1 rounded-full bg-green-100 text-success-600; }
-
-    .shadow-3xl { box-shadow: 0 35px 60px -15px rgba(0,0,0,0.35); }
 }

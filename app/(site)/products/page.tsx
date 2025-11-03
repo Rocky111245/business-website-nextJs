@@ -1,7 +1,21 @@
 // app/(site)/products/page.tsx
-import ProductsClient from "./ProductsClient";
+import React from 'react';
+
+import data from 'app/data/products.json'
+import ProductsClient from "@/app/(site)/products/ProductsClient";
+
+
+const products = data;
 
 export default function ProductsPage() {
-    // Server wrapper; client-side logic is inside ProductsClient.
-    return <ProductsClient />;
+    return (
+        <main>
+            <ProductsClient initialProducts={products} />
+        </main>
+    );
 }
+
+export const metadata = {
+    title: 'Products - Medical Equipment',
+    description: 'Browse our comprehensive range of medical equipment and solutions.',
+};

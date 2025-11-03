@@ -1,7 +1,20 @@
 // app/(site)/about-us/page.tsx
-import { FaAward, FaHandshake, FaHeart, FaShieldAlt } from "react-icons/fa";
+import Image from "next/image";
+import {
+    CheckCircle2,
+    Target,
+    Eye,
+    Calendar,
+    Users,
+    Award,
+} from "lucide-react";
 
-interface Manufacturer {
+export const metadata = {
+    title: "About Us | Evolution Medical Technologies",
+    description: "Leading bio-medical equipment distributor in Bangladesh since 1982. Specializing in ophthalmology, nephrology, ICU, dental, and neonatal equipment.",
+};
+
+interface Partner {
     name: string;
     subtitle?: string;
     description: string;
@@ -9,303 +22,268 @@ interface Manufacturer {
 }
 
 export default function AboutUsPage() {
-    const manufacturers: Manufacturer[] = [
+    const mainPartners: Partner[] = [
         {
-            name: "Topcon Corporation, Japan",
-            subtitle: "Ophthalmic Division",
-            description:
-                "Topcon Corporation is a Japanese manufacturer of optical equipment for ophthalmology and surveying",
-            logo:
-                "https://ik.imagekit.io/emtbd/emt_images/images/Topcon-Logo.wine.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673881480122",
+            name: "Topcon Corporation",
+            subtitle: "Japan - Ophthalmic Division",
+            description: "Japanese manufacturer of optical equipment for ophthalmology and surveying",
+            logo: "https://ik.imagekit.io/emtbd/emt_images/images/Topcon-Logo.wine.png",
         },
         {
-            name: "Seiler Instrument, USA",
-            description:
-                "Seiler specializes in precision optical instruments including surgical microscopes and colposcopes for medical applications",
-            logo:
-                "https://ik.imagekit.io/emtbd/emt_images/images/seiler.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673881479997",
-        },
-        {
-            name: "Dia Life S.A., Switzerland",
-            description:
-                "Leading manufacturer of high-quality dialysis equipment and nephrology solutions",
-            logo:
-                "https://ik.imagekit.io/emtbd/emt_images/images/DIA%20LIFE%20SA%20(SWITZERLAND).png?ik-sdk-version=javascript-1.4.3&updatedAt=1673881480191",
-        },
-        {
-            name: "Baxter International, USA",
-            description:
-                "The company primarily focuses on products to treat hemophilia, kidney disease, immune disorders and other chronic and acute medical conditions",
-            logo:
-                "https://ik.imagekit.io/emtbd/emt_images/images/baxter.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673881480039",
-        },
+            name: "Baxter International",
+            subtitle: "USA",
+            description: "Focuses on products to treat hemophilia, kidney disease, immune disorders and chronic medical conditions",
+            logo: "https://ik.imagekit.io/emtbd/emt_images/images/Baxter_logo_blue.png?updatedAt=1673881487679",
+        }
     ];
 
-    const values = [
-        {
-            icon: <FaAward className="text-4xl" />,
-            title: "Excellence",
-            color: "from-blue-500 to-indigo-600",
-            description:
-                "We strive for the highest standards in every product and service we deliver",
-        },
-        {
-            icon: <FaHandshake className="text-4xl" />,
-            title: "Integrity",
-            color: "from-green-500 to-teal-600",
-            description:
-                "Honesty and transparency guide all our business relationships",
-        },
-        {
-            icon: <FaHeart className="text-4xl" />,
-            title: "Quality",
-            color: "from-red-500 to-pink-600",
-            description:
-                "Premium medical equipment that healthcare professionals can trust",
-        },
-        {
-            icon: <FaShieldAlt className="text-4xl" />,
-            title: "Reliability",
-            color: "from-purple-500 to-violet-600",
-            description:
-                "Consistent support and service you can count on, always",
-        },
+    const companyStats = [
+        { icon: Calendar, value: "1982", label: "Established" },
+        { icon: Users, value: "32", label: "Team Members" },
+        { icon: Award, value: "40+", label: "Years Experience" },
+    ];
+
+    const capabilities = [
+        "Ophthalmology",
+        "Nephrology",
+        "ICU Equipment",
+        "Cardiology",
+        "Neonatal/Pediatric",
+        "Dental Equipment"
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50">
-            {/* Hero */}
-            <div className="relative bg-gradient-to-r from-primary-600 to-secondary-600 text-white overflow-hidden">
-                <div className="absolute inset-0 bg-black opacity-10" />
-                <div className="section-container relative z-10 py-20">
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                        About Evolution Medical Technologies
-                    </h1>
-                    <p className="text-xl md:text-2xl text-blue-100 max-w-3xl leading-relaxed">
-                        Your trusted partner in delivering world-class medical technology to
-                        healthcare institutions across Bangladesh.
-                    </p>
+        <div className="min-h-screen bg-white">
+            {/* Hero Section - Modern Design */}
+            <section className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-hidden">
+                {/* Animated Background */}
+                <div className="absolute inset-0 opacity-[0.03]">
+                    <div className="absolute inset-0" style={{
+                        backgroundImage: `radial-gradient(circle at 25% 25%, #ffffff 2px, transparent 0)`,
+                        backgroundSize: '50px 50px',
+                        animation: 'float 20s ease-in-out infinite'
+                    }} />
                 </div>
-            </div>
 
-            {/* Body */}
-            <div className="section-container">
-                <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 -mt-16 relative z-20">
-                    <div className="prose max-w-none">
-                        <h2 className="text-3xl font-bold text-gray-800 mb-6">Who We Are</h2>
-                        <div className="text-lg text-gray-700 space-y-4 leading-relaxed">
-                            <p>
-                                <strong className="text-primary-600">
-                                    Evolution Medical Technologies (EMT)
-                                </strong>{" "}
-                                is a leading distributor and seller of high-quality medical
-                                equipment in Bangladesh. Since our establishment, we have been
-                                committed to providing healthcare institutions with reliable,
-                                cutting-edge medical technology that enhances patient care and
-                                improves clinical outcomes.
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        {/* Content */}
+                        <div className="space-y-6">
+                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-400/20 backdrop-blur-sm">
+                                <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                                <span className="text-sm font-medium text-blue-300">Trusted Since 1982</span>
+                            </div>
+
+                            <h1 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
+                                Advancing Healthcare Through
+                                <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"> Innovative Technology</span>
+                            </h1>
+
+                            <p className="text-xl text-slate-300 leading-relaxed">
+                                Bangladesh's premier biomedical equipment distributor, bringing 40+ years of expertise and world-class medical technology to healthcare institutions nationwide.
                             </p>
-                            <p>
-                                We specialize in importing and distributing advanced medical
-                                equipment across multiple specialties including{" "}
-                                <span className="font-semibold text-secondary-600">
-                  Ophthalmology
-                </span>
-                                ,{" "}
-                                <span className="font-semibold text-secondary-600">
-                  Nephrology
-                </span>
-                                ,{" "}
-                                <span className="font-semibold text-secondary-600">
-                  Dental Treatment
-                </span>
-                                ,{" "}
-                                <span className="font-semibold text-secondary-600">
-                  ICU Equipment
-                </span>
-                                , and{" "}
-                                <span className="font-semibold text-secondary-600">
-                  Neonatal/Pediatric
-                </span>{" "}
-                                care.
-                            </p>
-                            <p>
-                                Our partnerships with globally renowned manufacturers ensure
-                                that healthcare providers in Bangladesh have access to the same
-                                world-class equipment used in leading medical facilities
-                                worldwide.
-                            </p>
+
+                            <div className="flex flex-wrap gap-4">
+                                <a
+                                    href="/contact-us"
+                                    className="inline-flex items-center gap-3 px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                                >
+                                    Partner With Us
+                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                                <a
+                                    href="/products"
+                                    className="inline-flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-all duration-300 border border-blue-500 hover:scale-105"
+                                >
+                                    View Products
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* Stats Grid - Modern Layout */}
+                        <div className="grid grid-cols-2 gap-4">
+                            {companyStats.map((stat, index) => {
+                                const Icon = stat.icon;
+                                return (
+                                    <div
+                                        key={index}
+                                        className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+                                    >
+                                        <Icon className="w-8 h-8 text-blue-400 mb-3" />
+                                        <div className="flex items-baseline gap-1">
+                                            <div className="text-2xl lg:text-3xl font-bold text-white">
+                                                {stat.value}
+                                            </div>
+                                            {stat.suffix && (
+                                                <div className="text-lg text-blue-300 font-semibold">
+                                                    {stat.suffix}
+                                                </div>
+                                            )}
+                                        </div>
+                                        <div className="text-sm text-slate-300 mt-1">
+                                            {stat.label}
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Mission/Vision */}
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 py-16">
-                <div className="section-container">
-                    <div className="grid md:grid-cols-2 gap-8">
-                        <div className="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105">
-                            <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center mb-6">
-                                <svg
-                                    className="w-8 h-8 text-white"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M13 10V3L4 14h7v7l9-11h-7z"
-                                    />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                                Our Mission
-                            </h3>
-                            <p className="text-gray-700 leading-relaxed text-lg">
-                                To be the most reliable and committed business partner in the
-                                sale of quality medical equipment, providing responsive
-                                after-sales service, and solutions to the needs of healthcare
-                                providers.
-                            </p>
-                        </div>
-
-                        <div className="bg-white rounded-2xl shadow-lg p-8 transform transition-all duration-300 hover:scale-105">
-                            <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl flex items-center justify-center mb-6">
-                                <svg
-                                    className="w-8 h-8 text-white"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                    />
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth={2}
-                                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                    />
-                                </svg>
-                            </div>
-                            <h3 className="text-2xl font-bold text-gray-800 mb-4">
-                                Our Vision
-                            </h3>
-                            <p className="text-gray-700 leading-relaxed text-lg">
-                                To be the leading biomedical equipment distributor and seller in
-                                Bangladesh, setting the standard for excellence in medical
-                                technology solutions.
-                            </p>
-                        </div>
-                    </div>
+                {/* Wave Decoration */}
+                <div className="absolute bottom-0 left-0 right-0">
+                    <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12">
+                        <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" className="fill-white"></path>
+                        <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" className="fill-white"></path>
+                        <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" className="fill-white"></path>
+                    </svg>
                 </div>
-            </div>
+            </section>
 
-            {/* Values */}
-            <div className="section-container">
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                        Our Core Values
-                    </h2>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                        These principles guide everything we do and every decision we make
-                    </p>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {values.map((value, index) => (
-                        <div key={index} className="group">
-                            <div className="bg-white rounded-2xl shadow-lg p-6 h-full transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
-                                <div
-                                    className={`w-16 h-16 bg-gradient-to-br ${value.color} rounded-xl flex items-center justify-center mb-4 text-white group-hover:scale-110 transition-transform`}
-                                >
-                                    {value.icon}
-                                </div>
-                                <h4 className="text-xl font-bold text-gray-800 mb-3">
-                                    {value.title}
-                                </h4>
-                                <p className="text-gray-600 leading-relaxed">
-                                    {value.description}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* Partners */}
-            <div className="bg-gradient-to-br from-gray-100 to-gray-200 py-16">
-                <div className="section-container">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-bold text-gray-800 mb-4">
-                            Our Manufacturing Partners
-                        </h2>
-                        <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                            We proudly represent world-leading manufacturers who share our
-                            commitment to quality and innovation
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {manufacturers.map((m, i) => (
-                            <div
-                                key={i}
-                                className="bg-white rounded-2xl shadow-xl overflow-hidden transform transition-all duration-300 hover:shadow-2xl hover:scale-105"
-                            >
-                                <div className="bg-gradient-to-r from-gray-50 to-white p-8 flex items-center justify-center border-b-4 border-primary-500">
-                                    <img
-                                        src={m.logo}
-                                        alt={m.name}
-                                        className="max-h-32 w-auto object-contain"
-                                    />
-                                </div>
-                                <div className="p-6">
-                                    <h3 className="text-xl font-bold text-gray-800 mb-2">
-                                        {m.name}
-                                    </h3>
-                                    {m.subtitle && (
-                                        <p className="text-primary-600 font-semibold mb-3">
-                                            {m.subtitle}
-                                        </p>
-                                    )}
-                                    <p className="text-gray-600 leading-relaxed">
-                                        {m.description}
+            {/* Combined Content Section */}
+            <section className="py-12 bg-white">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="grid lg:grid-cols-3 gap-8">
+                        {/* Main Content */}
+                        <div className="lg:col-span-2 space-y-8">
+                            {/* Company Overview */}
+                            <div>
+                                <h2 className="text-2xl font-bold text-slate-900 mb-4">Who We Are</h2>
+                                <div className="space-y-4 text-slate-600">
+                                    <p>
+                                        Evolution Medical Technologies Ltd. was established to participate in the evolution of Bangladesh's medical equipment industry, offering the latest medical technologies to healthcare providers.
+                                    </p>
+                                    <p>
+                                        Led by <strong className="text-slate-900">Engineer Mohammad Taufique Hasan</strong>, Managing Director with experience since the 1990s, we are the sister concern of National Trading Syndicate Ltd., the oldest biomedical equipment company in Bangladesh, established in 1982.
                                     </p>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
 
-            {/* CTA */}
-            <div className="section-container">
-                <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-2xl p-8 md:p-12 text-center text-white shadow-2xl">
-                    <h3 className="text-3xl font-bold mb-4">Ready to Experience Excellence?</h3>
-                    <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                        Partner with EMT and discover why leading healthcare institutions
-                        trust us for their medical equipment needs.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a
-                            href="/contact-us"
-                            className="inline-block bg-white text-primary-600 font-semibold py-3 px-8 rounded-lg hover:bg-gray-100 transition-colors duration-200 shadow-lg"
-                        >
-                            Contact Us
-                        </a>
-                        <a
-                            href="/products"
-                            className="inline-block bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-primary-600 transition-all duration-200"
-                        >
-                            View Products
-                        </a>
+                            {/* Mission & Vision - Compact */}
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div className="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                                            <Target className="w-5 h-5 text-blue-600" />
+                                        </div>
+                                        <h3 className="text-lg font-bold text-slate-900">Our Mission</h3>
+                                    </div>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        To bring the latest medical technologies to Bangladesh, providing reliable distribution, exceptional after-sales service, and building lasting partnerships with healthcare providers.
+                                    </p>
+                                </div>
+
+                                <div className="bg-slate-50 rounded-xl p-6 border border-slate-200">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
+                                            <Eye className="w-5 h-5 text-slate-700" />
+                                        </div>
+                                        <h3 className="text-lg font-bold text-slate-900">Our Vision</h3>
+                                    </div>
+                                    <p className="text-slate-600 text-sm leading-relaxed">
+                                        To be Bangladesh's most trusted biomedical equipment distributor, recognized for excellence in medical technology solutions and customer service.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Medical Specialties */}
+                            <div>
+                                <h3 className="text-lg font-bold text-slate-900 mb-4">Medical Specialties</h3>
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                    {capabilities.map((capability, index) => (
+                                        <div key={index} className="flex items-center gap-2">
+                                            <CheckCircle2 className="w-4 h-4 text-blue-600 flex-shrink-0" />
+                                            <span className="text-slate-700 font-medium text-sm">{capability}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Partners Sidebar */}
+                        <div className="space-y-6">
+                            <div>
+                                <h3 className="text-xl font-bold text-slate-900 mb-4">Our Global Partners</h3>
+                                <p className="text-sm text-slate-600 mb-6">
+                                    World-leading manufacturers we proudly represent
+                                </p>
+                            </div>
+
+                            <div className="space-y-4">
+                                {mainPartners.map((partner, index) => (
+                                    <div
+                                        key={index}
+                                        className="bg-slate-50 rounded-lg p-4 border border-slate-200 hover:border-blue-300 transition-all"
+                                    >
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <div className="relative w-16 h-12 flex-shrink-0">
+                                                <Image
+                                                    src={partner.logo}
+                                                    alt={partner.name}
+                                                    fill
+                                                    className="object-contain"
+                                                    sizes="64px"
+                                                />
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <h4 className="text-sm font-bold text-slate-900">
+                                                    {partner.name}
+                                                </h4>
+                                                {partner.subtitle && (
+                                                    <p className="text-xs text-blue-600 font-semibold">
+                                                        {partner.subtitle}
+                                                    </p>
+                                                )}
+                                            </div>
+                                        </div>
+                                        <p className="text-xs text-slate-600 leading-relaxed">
+                                            {partner.description}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="py-20 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
+                <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <div className="max-w-4xl mx-auto">
+                        <h3 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+                            Join Us in Shaping the Future of Healthcare
+                        </h3>
+                        <p className="text-xl text-slate-300 mb-8 leading-relaxed">
+                            Partner with a company that combines four decades of expertise with innovative medical technology solutions to advance healthcare across Bangladesh.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a
+                                href="/contact-us"
+                                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white hover:bg-slate-50 text-slate-900 font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
+                            >
+                                Get In Touch
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                            <a
+                                href="/products"
+                                className="inline-flex items-center gap-3 px-8 py-4 bg-transparent border-2 border-white text-white hover:bg-white hover:text-slate-900 font-semibold rounded-xl transition-all duration-300 hover:scale-105"
+                            >
+                                Explore Solutions
+                            </a>
+                        </div>
+
+                        <div className="mt-8 text-sm text-slate-400">
+                            <p>Ready to transform your healthcare facility? Let's discuss your needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }
