@@ -2,7 +2,7 @@
 import React from 'react';
 
 import data from 'app/data/products.json'
-import ProductsClient from "@/app/(site)/products/ProductsClient";
+import ProductsClient from "@/app/(site)/products/_components/ProductsClient";
 
 
 const products = data;

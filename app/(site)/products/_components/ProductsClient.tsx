@@ -1,6 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
-import ProductCard, { ApiProduct } from "@/app/components/ProductCard";
+import ProductCard, { ApiProduct } from "@/app/(site)/products/_components/ProductCard";
 import { extractFilterOptions } from "./ProductsFilter";
 
 interface ProductsClientProps {

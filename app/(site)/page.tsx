@@ -1,24 +1,20 @@
 // app/(site)/page.tsx
 import SubFooter from "./../components/SubFooter";
-import HeroSection from "./../components/home/HeroSection";
-import GallerySection from "./../components/home/GallerySection";
-import TrustedBrandsSection from "./../components/home/TrustedBrandsSection";
-import CategorySection from "./../components/home/CategorySection";
-import ServicesGrid from "./../components/home/ServicesGrid";
-import ProductShowcase from "./../components/home/ProductShowcase";
-import MissionVisionSection from "./../components/home/MissionVisionSection";
+import HeroSection from "@/app/(site)/home/HeroSection";
+import ProductShowcase from "@/app/(site)/home/ProductShowcase";
+import MissionVisionSection from "@/app/(site)/home/MissionVisionSection";
+import MedicalCarousel from "@/app/(site)/home/MedicalCarousel";
+import EquipmentAndOffers from "@/app/(site)/home/EquipmentAndOffers";
+
 
 export default function HomePage() {
     return (
         <div className="min-h-screen bg-gray-50">
             <HeroSection />
-            <GallerySection />
-            <TrustedBrandsSection />
-            <CategorySection />
-            <ServicesGrid />
+            <MedicalCarousel />
+            <EquipmentAndOffers/>
             <ProductShowcase />
             <MissionVisionSection />
-            <SubFooter />
         </div>
     );
 }

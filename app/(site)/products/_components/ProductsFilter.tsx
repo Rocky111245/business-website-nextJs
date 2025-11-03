@@ -1,6 +1,6 @@
 'use client';
 
-import { ApiProduct } from "@/app/components/ProductCard";
+import { ApiProduct } from "@/app/(site)/products/_components/ProductCard";
 
 
 export const extractFilterOptions = (products: ApiProduct[]) => {
