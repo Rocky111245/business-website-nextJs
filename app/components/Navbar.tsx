@@ -192,6 +192,15 @@ export default function Navbar() {
                         >
                             Contact Us
                         </Link>
+
+                        {/* Medical Blogs */}
+                        <Link
+                            href="/medical-blogs"
+                            className="px-5 py-2 text-[15px] font-medium text-slate-700 hover:text-slate-900 transition-colors relative group"
+                        >
+                            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-blue-600 group-hover:w-3/4 transition-all duration-300" />
+                            Medical Blogs
+                        </Link>
                     </nav>
 
                     {/* Mobile Menu Button */}
@@ -252,6 +261,14 @@ export default function Navbar() {
                                 className="mx-4 mt-2 px-6 py-3 text-[15px] font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-center shadow-sm"
                             >
                                 Contact Us
+                            </Link>
+
+                            {/* Medical Blogs */}
+                            <Link
+                                href="/medical-blogs"
+                                className="mx-4 mt-2 px-6 py-3 text-[15px] font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors text-center shadow-sm"
+                            >
+                                Medical Blogs
                             </Link>
                         </nav>
                     </div>

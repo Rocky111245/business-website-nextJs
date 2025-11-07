@@ -1,204 +1,217 @@
+// app/(site)/products/_components/ProductsClient.tsx
 "use client";
-import React, { useMemo, useState } from "react";
-import ProductCard, { ApiProduct } from "@/app/(site)/products/_components/ProductCard";
-import { extractFilterOptions } from "./ProductsFilter";
 
-interface ProductsClientProps {
-    initialProducts: ApiProduct[];
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import ProductCard from "@/app/(site)/products/_components/ProductCard";
+import Pagination from "./Pagination";
+import catalog from "@/app/data/product-api";
+import ProductsFilterPanel from "./ProductsFilterPanel";
+
+// Derive item type straight from the single source
+type Product = (typeof catalog)[number];
+
+// 10–15 per page depending on viewport width
+function getPageSizeByWidth(w: number) {
+    if (w >= 1280) return 15;
+    if (w >= 768) return 12;
+    return 10;
 }
 
-// Local extension so we can read company/equipmentType even if ApiProduct doesn't declare them yet.
-type ProductWithMeta = ApiProduct & {
-    company?: string;
-    equipmentType?: string;
-    description?: string;
-};
+// ✅ Local, pure helper (replaces ProductsFilter.ts)
+function buildFilterOptions(products: ReadonlyArray<Product>) {
+    const companies = new Set<string>();
+    const equipmentTypes = new Set<string>();
+    for (const p of products) {
+        companies.add(p.company);
+        equipmentTypes.add(p.equipmentType);
+    }
+    return {
+        companies: Array.from(companies).sort(),
+        equipmentTypes: Array.from(equipmentTypes).sort(),
+    };
+}
 
-export default function ProductsClient({ initialProducts }: ProductsClientProps) {
-    const products = initialProducts as ProductWithMeta[];
+export default function ProductsClient() {
+    // Single source of truth
+    const products = catalog as ReadonlyArray<Product>;
 
+    const router = useRouter();
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    // Page from URL (fallback to 1)
+    const pageParam = Number(searchParams.get("page") || "1");
+    const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
+
+    // Hydration-safe default; becomes responsive post-mount
+    const [pageSize, setPageSize] = useState<number>(12);
+    useEffect(() => {
+        const compute = () => setPageSize(getPageSizeByWidth(window.innerWidth));
+        compute();
+        window.addEventListener("resize", compute);
+        return () => window.removeEventListener("resize", compute);
+    }, []);
+
+    // Filters (only Company and Equipment Type, plus Search)
     const [selectedCompany, setSelectedCompany] = useState<string>("All");
     const [selectedType, setSelectedType] = useState<string>("All");
     const [searchTerm, setSearchTerm] = useState<string>("");
 
-    const filterOptions = useMemo(() => extractFilterOptions(products), [products]);
+    const contentTopRef = useRef<HTMLDivElement | null>(null);
 
-    const filteredProducts = useMemo(() => {
-        const term = searchTerm.trim().toLowerCase();
+    // Build filter options directly from source (no inference)
+    const { companies, equipmentTypes } = useMemo(
+        () => buildFilterOptions(products),
+        [products]
+    );
 
+    // Apply filters + search
+    const filtered = useMemo(() => {
+        const q = searchTerm.toLowerCase();
         return products.filter((p) => {
-            const company = (p.company ?? "").trim();
-            const type = (p.equipmentType ?? "").trim();
-
-
-            const matchesSearch =
-                term === "" ||
-                p.name.toLowerCase().includes(term) ||
-                (p.description ?? "").toLowerCase().includes(term);
-
-            // Company filter (explicit fields preferred; falls back to empty string)
-            const matchesCompany = selectedCompany === "All" || company === selectedCompany;
-
-            // Equipment Type filter
-            const matchesType = selectedType === "All" || type === selectedType;
-
-            // Decision: AND logic (typical UX expectation: both filters must match)
-            return matchesSearch && matchesCompany && matchesType;
+            const inSearch =
+                !q || p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q);
+            const inCompany = selectedCompany === "All" || p.company === selectedCompany;
+            const inType = selectedType === "All" || p.equipmentType === selectedType;
+            return inSearch && inCompany && inType;
         });
-    }, [products, selectedCompany, selectedType, searchTerm]);
+    }, [products, searchTerm, selectedCompany, selectedType]);
 
-    const handleTagClick = (tag: string, kind: "category" | "brand") => {
-        if (kind === "brand") {
-            setSelectedCompany(tag);
+    // Pagination
+    const total = filtered.length;
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
+    const clampedPage = Math.min(page, totalPages);
+    const start = (clampedPage - 1) * pageSize;
+    const end = Math.min(start + pageSize, total);
+    const pageItems = filtered.slice(start, end);
+
+    // 1-based for display (avoid SSR/CSR mismatch like "0–X")
+    const startDisplay = total === 0 ? 0 : start + 1;
+
+    const setUrlPage = (nextPage: number) => {
+        const params = new URLSearchParams(searchParams);
+        if (nextPage <= 1) params.delete("page");
+        else params.set("page", String(nextPage));
+        router.replace(params.size ? `${pathname}?${params}` : pathname, { scroll: false });
+    };
+
+    const handlePageChange = (next: number) => {
+        setUrlPage(next);
+        if (contentTopRef.current) {
+            contentTopRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
         } else {
-            setSelectedType(tag);
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
     };
 
+    const onCompanyChange = (v: string) => { setSelectedCompany(v); setUrlPage(1); };
+    const onTypeChange = (v: string) => { setSelectedType(v); setUrlPage(1); };
+    const onSearchChange = (v: string) => { setSearchTerm(v); setUrlPage(1); };
     const clearFilters = () => {
         setSelectedCompany("All");
         setSelectedType("All");
         setSearchTerm("");
+        setUrlPage(1);
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 py-8">
-            <div className="container mx-auto px-4">
-                {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold text-slate-900 mb-4">Our Products</h1>
-                    <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-                        Discover our comprehensive range of medical equipment and solutions from world-leading manufacturers.
-                    </p>
+        <div className="min-h-screen bg-slate-50">
+            {/* Hero */}
+            <div className="relative isolate overflow-hidden bg-gradient-to-tr from-blue-600 via-indigo-600 to-violet-600">
+                <div className="container mx-auto px-4">
+                    <header className="py-3 lg:py-4 text-white">
+                        <nav className="text-sm/6 mb-4" aria-label="Breadcrumb">
+                            <ol className="flex items-center gap-2 opacity-90">
+                                <li><Link href="/" className="hover:underline">Home</Link></li>
+                                <li aria-hidden="true">/</li>
+                                <li className="opacity-90">Products</li>
+                            </ol>
+                        </nav>
+                        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+                            <div>
+                                <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">Explore Our Products</h1>
+                                <p className="my-4 text-white/90">
+                                    High-quality medical equipment from trusted manufacturers. Filter, search, and compare to find exactly what you need.
+                                </p>
+                            </div>
+                        </div>
+                    </header>
                 </div>
-
-                {/* Filters */}
-                <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-8">
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        {/* Search */}
-                        <div className="md:col-span-2">
-                            <label htmlFor="search" className="block text-sm font-medium text-slate-700 mb-2">
-                                Search Products
-                            </label>
-                            <input
-                                type="text"
-                                id="search"
-                                placeholder="Search by product name or description..."
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            />
-                        </div>
-
-                        {/* Company */}
-                        <div>
-                            <label htmlFor="company" className="block text-sm font-medium text-slate-700 mb-2">
-                                Company
-                            </label>
-                            <select
-                                id="company"
-                                value={selectedCompany}
-                                onChange={(e) => setSelectedCompany(e.target.value)}
-                                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            >
-                                <option value="All">All Companies</option>
-                                {filterOptions.companies.map((c) => (
-                                    <option key={c} value={c}>
-                                        {c}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        {/* Equipment Type */}
-                        <div>
-                            <label htmlFor="type" className="block text-sm font-medium text-slate-700 mb-2">
-                                Equipment Type
-                            </label>
-                            <select
-                                id="type"
-                                value={selectedType}
-                                onChange={(e) => setSelectedType(e.target.value)}
-                                className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                            >
-                                <option value="All">All Equipment Types</option>
-                                {filterOptions.equipmentTypes.map((t) => (
-                                    <option key={t} value={t}>
-                                        {t}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-
-                    {/* Active Filters & Clear */}
-                    <div className="flex flex-wrap items-center justify-between mt-4">
-                        <div className="flex flex-wrap gap-2">
-                            {selectedCompany !== "All" && (
-                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                  Company: {selectedCompany}
-                                    <button onClick={() => setSelectedCompany("All")} className="ml-2 hover:text-blue-600">
-                    ×
-                  </button>
-                </span>
-                            )}
-                            {selectedType !== "All" && (
-                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                  Type: {selectedType}
-                                    <button onClick={() => setSelectedType("All")} className="ml-2 hover:text-green-600">
-                    ×
-                  </button>
-                </span>
-                            )}
-                            {searchTerm && (
-                                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
-                  Search: {searchTerm}
-                                    <button onClick={() => setSearchTerm("")} className="ml-2 hover:text-orange-600">
-                    ×
-                  </button>
-                </span>
-                            )}
-                        </div>
-
-                        {(selectedCompany !== "All" || selectedType !== "All" || searchTerm) && (
-                            <button onClick={clearFilters} className="text-sm text-slate-600 hover:text-slate-800 underline">
-                                Clear all filters
-                            </button>
-                        )}
-                    </div>
+                <div className="pointer-events-none absolute inset-0 -z-10 opacity-30">
+                    <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/20 blur-3xl" />
+                    <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-white/20 blur-3xl" />
                 </div>
+            </div>
 
-                {/* Results Count */}
-                <div className="mb-6">
-                    <p className="text-slate-600">
-                        Showing {filteredProducts.length} of {products.length} products
-                    </p>
-                </div>
+            {/* Main */}
+            <div className="mx-auto px-8 py-8 flex flex-col min-h-screen">
+                <div ref={contentTopRef} />
+                <main className="mt-2 grid gap-6 lg:grid-cols-[400px_1fr] flex-1">
+                    {/* Sidebar */}
+                    <ProductsFilterPanel
+                        companies={companies}
+                        equipmentTypes={equipmentTypes}
+                        selectedCompany={selectedCompany}
+                        selectedType={selectedType}
+                        searchTerm={searchTerm}
+                        onCompanyChange={onCompanyChange}
+                        onTypeChange={onTypeChange}
+                        onSearchChange={onSearchChange}
+                        clearFilters={clearFilters}
+                    />
 
-                {/* Products Grid */}
-                {filteredProducts.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        {filteredProducts.map((product, index) => (
-                            <ProductCard key={`${product.name}-${index}`} product={product} onTagClick={handleTagClick} />
-                        ))}
-                    </div>
-                ) : (
-                    <div className="text-center py-12">
-                        <div className="text-slate-400 mb-4">
-                            <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                    {/* Content */}
+                    <section className="flex flex-col min-h-[60vh]">
+                        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                            <p className="text-slate-600">
+                                Showing {startDisplay}–{end} of {total} products
+                                <span className="text-slate-400"> &nbsp;•&nbsp; Page {clampedPage} of {totalPages}</span>
+                            </p>
                         </div>
-                        <h3 className="text-lg font-semibold text-slate-900 mb-2">No products found</h3>
-                        <p className="text-slate-600 mb-4">Try adjusting your filters or search terms.</p>
-                        <button
-                            onClick={clearFilters}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+
+                        <div
+                            className="
+                grid items-stretch gap-4
+                grid-cols-[repeat(auto-fill,minmax(250px,1fr))]
+                sm:grid-cols-[repeat(auto-fill,minmax(280px,1fr))]
+                lg:grid-cols-[repeat(auto-fill,minmax(300px,1fr))]
+                2xl:grid-cols-[repeat(auto-fill,minmax(350px,1fr))]
+              "
                         >
-                            Clear all filters
-                        </button>
-                    </div>
-                )}
+                            {pageItems.length ? (
+                                pageItems.map((product, i) => (
+                                    <ProductCard key={`${product.name}-${start + i}`} product={product} />
+                                ))
+                            ) : (
+                                <div className="col-span-full text-center py-12">
+                                    <div className="text-slate-400 mb-4">
+                                        <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1}
+                                                  d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </div>
+                                    <h3 className="text-lg font-semibold text-slate-900 mb-2">No products found</h3>
+                                    <p className="text-slate-600 mb-4">Try adjusting your filters or search terms.</p>
+                                    <button
+                                        onClick={clearFilters}
+                                        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                                    >
+                                        Clear all filters
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
+                        <Pagination
+                            page={clampedPage}
+                            totalPages={totalPages}
+                            onChange={handlePageChange}
+                            className="mt-10"
+                        />
+                    </section>
+                </main>
             </div>
         </div>
     );

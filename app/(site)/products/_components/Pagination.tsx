@@ -1,81 +1,93 @@
+"use client";
 import React from "react";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
-export interface PaginationProps {
-    productsPerPage: number;
-    totalProducts: number;
-    currentPage: number;
-    paginate: (page: number) => void;
+interface PaginationProps {
+    page: number;               // 1-based
+    totalPages: number;
+    onChange: (page: number) => void;
+    className?: string;
+    siblingCount?: number;      // numbers around current page
+    boundaryCount?: number;     // numbers at the ends
 }
 
+function range(start: number, end: number) {
+    return Array.from({ length: Math.max(0, end - start + 1) }, (_, i) => start + i);
+}
+
+const DOTS = "..." as const;
+type PageItem = number | typeof DOTS;
+
 export default function Pagination({
-                                       productsPerPage,
-                                       totalProducts,
-                                       currentPage,
-                                       paginate,
+                                       page,
+                                       totalPages,
+                                       onChange,
+                                       className,
+                                       siblingCount = 1,
+                                       boundaryCount = 1,
                                    }: PaginationProps) {
-    const pageNumbers: number[] = [];
-    const totalPages = Math.ceil(totalProducts / productsPerPage);
+    if (totalPages <= 1) return null;
 
-    for (let i = 1; i <= totalPages; i++) pageNumbers.push(i);
+    const startPages = range(1, Math.min(boundaryCount, totalPages));
+    const endPages = range(Math.max(totalPages - boundaryCount + 1, boundaryCount + 1), totalPages);
 
-    const getPageNumbers = (): (number | "...")[] => {
-        if (totalPages <= 7) return pageNumbers;
-        if (currentPage <= 4) return [...pageNumbers.slice(0, 5), "...", totalPages];
-        if (currentPage >= totalPages - 3) return [1, "...", ...pageNumbers.slice(totalPages - 5)];
-        return [1, "...", currentPage - 1, currentPage, currentPage + 1, "...", totalPages];
-    };
+    const leftSibling = Math.max(page - siblingCount, Math.max(...startPages) + 1);
+    const rightSibling = Math.min(page + siblingCount, Math.min(...endPages) - 1);
+
+    const showLeftDots = leftSibling > Math.max(...startPages) + 1;
+    const showRightDots = rightSibling < Math.min(...endPages) - 1;
+
+    const middlePages = range(leftSibling, rightSibling);
+    const items: PageItem[] = [
+        ...startPages,
+        ...(showLeftDots ? [DOTS] : []),
+        ...middlePages,
+        ...(showRightDots ? [DOTS] : []),
+        ...endPages,
+    ];
+
+    const btn =
+        "px-3 py-2 rounded-lg border text-sm bg-white hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed";
 
     return (
-        <nav className="flex justify-center items-center space-x-2">
-            {/* Previous */}
+        <nav
+            className={["mt-8 flex items-center justify-center gap-2", className || ""].join(" ")}
+            role="navigation"
+            aria-label="Pagination"
+        >
             <button
-                onClick={() => paginate(currentPage - 1)}
-                disabled={currentPage === 1}
-                className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${
-                    currentPage === 1
-                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                        : "bg-white text-primary-600 hover:bg-primary-600 hover:text-white shadow-md"
-                }`}
+                type="button"
+                onClick={() => onChange(Math.max(1, page - 1))}
+                disabled={page === 1}
+                className={btn}
                 aria-label="Previous page"
             >
-                <FaChevronLeft className="text-sm" />
+                Prev
             </button>
 
-            {/* Numbers */}
-            {getPageNumbers().map((num, idx) =>
-                    num === "..." ? (
-                        <span key={`dots-${idx}`} className="px-3 py-2 text-gray-500">
-            ...
-          </span>
-                    ) : (
-                        <button
-                            key={num}
-                            onClick={() => paginate(num)}
-                            className={`w-10 h-10 rounded-lg font-semibold transition-all duration-200 ${
-                                currentPage === num
-                                    ? "bg-gradient-to-r from-primary-600 to-secondary-600 text-white shadow-lg scale-110"
-                                    : "bg-white text-gray-700 hover:bg-primary-50 hover:text-primary-600 shadow-md"
-                            }`}
-                            aria-current={currentPage === num ? "page" : undefined}
-                        >
-                            {num}
-                        </button>
-                    )
+            {items.map((it, idx) =>
+                it === DOTS ? (
+                    <span key={`dots-${idx}`} className="px-2 text-slate-500 select-none">…</span>
+                ) : (
+                    <button
+                        key={it}
+                        type="button"
+                        onClick={() => onChange(it)}
+                        aria-current={page === it ? "page" : undefined}
+                        className={[btn, page === it ? "border-blue-600 text-blue-700 font-semibold" : "border-slate-200 text-slate-700"].join(" ")}
+                    >
+                        {it}
+                    </button>
+                )
             )}
 
-            {/* Next */}
             <button
-                onClick={() => paginate(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className={`flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${
-                    currentPage === totalPages
-                        ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                        : "bg-white text-primary-600 hover:bg-primary-600 hover:text-white shadow-md"
-                }`}
+                type="button"
+                onClick={() => onChange(Math.min(totalPages, page + 1))}
+                disabled={page === totalPages}
+                className={btn}
                 aria-label="Next page"
             >
-                <FaChevronRight className="text-sm" />
+                Next
             </button>
         </nav>
     );
