@@ -119,7 +119,7 @@ export default function ProductsClient() {
     return (
         <div className="min-h-screen bg-slate-50">
             {/* Hero */}
-            <div className="relative isolate overflow-hidden bg-gradient-to-tr from-blue-600 via-indigo-600 to-violet-600">
+            <div className="relative isolate overflow-hidden bg-gradient-to-tr from-blue-800 via-indigo-800 to-indigo-600">
                 <div className="container mx-auto px-4">
                     <header className="py-3 lg:py-4 text-white">
                         <nav className="text-sm/6 mb-4" aria-label="Breadcrumb">
