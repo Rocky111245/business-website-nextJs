@@ -1,11 +1,10 @@
 // app/(site)/page.tsx
-import SubFooter from "./../components/SubFooter";
-import HeroSection from "@/app/(site)/home/HeroSection";
-import ProductShowcase from "@/app/(site)/home/ProductShowcase";
-import MissionVisionSection from "@/app/(site)/home/MissionVisionSection";
-import MedicalCarousel from "@/app/(site)/home/MedicalCarousel";
-import EquipmentAndOffers from "@/app/(site)/home/EquipmentAndOffers";
-import PartnersShowcase from "@/app/(site)/home/PartnersShowcase";
+import HeroSection from "@/app/(site)/home/_components/HeroSection";
+import ProductShowcase from "@/app/(site)/home/_components/ProductShowcase";
+import MissionVisionSection from "@/app/(site)/home/_components/MissionVisionSection";
+import MedicalCarousel from "@/app/(site)/home/_components/MedicalCarousel";
+import EquipmentAndOffers from "@/app/(site)/home/_components/EquipmentAndOffers";
+import PartnersShowcase from "@/app/(site)/home/_components/PartnersShowcase";
 
 
 export default function HomePage() {

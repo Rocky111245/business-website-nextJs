@@ -4,13 +4,13 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import products from "../../data/products.json";
+import products from "../../../data/products.json";
 
 type Product = {
     name: string;
     description: string;
-    productlink: string;
-    Brochure?: string;
+    productLink: string;
+    brochure?: string;
     company?: string;
     equipmentType?: string;
 };
@@ -19,7 +19,7 @@ export default function ProductShowcase() {
     // Compute product list first - this is always executed
     const productList = useMemo(() => {
         return (products as unknown as Product[])
-            .filter(p => p?.name && p.productlink)
+            .filter(p => p?.name && p.productLink)
             .slice(0, 15);
     }, []);
 
@@ -84,7 +84,7 @@ export default function ProductShowcase() {
 
     return (
         <section className="relative w-full overflow-hidden py-16 lg:py-20">
-            <div className="absolute inset-0 bg-gradient-to-b from-white via-sky-50 to-sky-200" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white via-sky-50 to-sky-100" />
 
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
                 {/* Header */}
@@ -120,7 +120,7 @@ export default function ProductShowcase() {
                                     {productList.map((p, i) => (
                                         <div key={`${p.name}-${i}`} className="w-full flex-shrink-0 relative">
                                             <Image
-                                                src={p.productlink.trim()}
+                                                src={p.productLink.trim()}
                                                 alt={p.name}
                                                 fill
                                                 className="object-contain"
@@ -212,9 +212,9 @@ export default function ProductShowcase() {
 
                         {/* Action Buttons */}
                         <div className="flex flex-wrap gap-4 pt-4">
-                            {current?.Brochure && (
+                            {current?.brochure && (
                                 <Link
-                                    href={current.Brochure}
+                                    href={current.brochure}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="px-6 py-3 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors"

@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
 }
 
-// In Next.js 15, params is a Promise. Await it before using.
+
 export default async function BlogArticlePage({ params }: Props) {
     const { id } = await params;
     return <BlogPost id={id} />;

@@ -1,10 +1,18 @@
 import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
+const WHATSAPP_PHONE = "8801727072868";
+const WHATSAPP_MESSAGE =
+    "Hello Evolution Medical Technologies, I’d like to learn more.";
+const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
+    WHATSAPP_MESSAGE
+)}`;
+
+
 export default function WhatsAppIcon() {
     return (
         <a
-            href="https://wa.me/8801713141783"
+            href={WHATSAPP_HREF }
             target="_blank"
             rel="noopener noreferrer"
             className="fixed bottom-6 right-6 z-50 group"

@@ -20,5 +20,5 @@ const ApiProductsSchema = z.array(ApiProductSchema);
 // Validate once at module load; original objects preserved.
 const products = ApiProductsSchema.parse(raw);
 
-// Single value export (default). No other exports.
+// Single value export (default).
 export default products as ReadonlyArray<z.infer<typeof ApiProductSchema>>;

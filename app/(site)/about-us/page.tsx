@@ -47,7 +47,7 @@ export default function AboutUsPage() {
         },
         {
             name: "Baxter International",
-            subtitle: "USA",
+            subtitle: "USA - Nephrology Division",
             description:
                 "Focuses on products to treat hemophilia, kidney disease, immune disorders and chronic medical conditions",
             logo:
@@ -125,7 +125,7 @@ export default function AboutUsPage() {
                     />
                 </div>
 
-                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-18 lg:py-22">
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
                         <div className="space-y-6">
                             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-400/20 backdrop-blur-sm">

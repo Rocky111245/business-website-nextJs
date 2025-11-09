@@ -1,5 +1,4 @@
 // app/(site)/contact-us/page.tsx
-import Link from "next/link";
 import Script from "next/script";
 import { Mail, Phone, Clock, MapPin, MessageSquare, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
@@ -10,7 +9,7 @@ import type { Metadata } from "next";
  * ----------
  */
 const SITE_NAME = "Evolution Medical Technologies";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || ""; // e.g., https://emtbd.com (optional)
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "";
 const CONTACT_PATH = "/contact-us";
 
 const EMAIL = "hasan@emtbd.com" as const;
@@ -19,15 +18,24 @@ const PHONE_PRIMARY_TEL = "+8801727072868" as const;
 const PHONE_SECONDARY_DISPLAY = "+880 1713-013770" as const;
 const PHONE_SECONDARY_TEL = "+8801713013770" as const;
 
-const WHATSAPP_PHONE = "8801727072868"; // example: if your primary line is on WhatsApp
+const WHATSAPP_PHONE = "8801727072868";
 const WHATSAPP_MESSAGE =
     "Hello Evolution Medical Technologies, I’d like to learn more.";
-const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const WHATSAPP_HREF = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
+    WHATSAPP_MESSAGE
+)}`;
 
+/** Google Maps: place URL (for directions) and embed src (for iframe) */
+const MAPS_PLACE_URL =
+    "https://www.google.com/maps/place/Evolution+Medical+Technologies+Ltd.+(EMT)+A+Concern+of+National+Trading+Syndicate+(NTS)/@23.752608,90.391943,17z/data=!3m2!4b1!5s0x3755b8979bc242fd:0x58a7dbc083447a8f!4m6!3m5!1s0x3755b8a2ff2f23db:0x4ce31fde680075a0!8m2!3d23.752608!4d90.391943!16s%2Fg%2F11c48n1q9c?hl=en-GB&entry=ttu";
 
+const MAPS_EMBED_SRC =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.853361885159!2d90.391943!3d23.752607999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8a2ff2f23db%3A0x4ce31fde680075a0!2sEvolution%20Medical%20Technologies%20Ltd.%20(EMT)%20A%20Concern%20of%20National%20Trading%20Syndicate%20(NTS)!5e0!3m2!1sen!2smy!4v1762683619151!5m2!1sen!2smy";
+
+/** Address (display) */
 const ADDRESS_LINES = [
-    "House # 12, Road # 17, Sector # 11",
-    "Uttara Model Town, Dhaka-1230",
+    "2nd floor, 41/1 Kazi Nazrul Islam Avenue",
+    "Zennath Bhaban, Dhaka 1215",
     "Bangladesh",
 ] as const;
 
@@ -80,9 +88,10 @@ function JsonLd() {
         telephone: PHONE_PRIMARY_TEL,
         address: {
             "@type": "PostalAddress",
-            streetAddress: ADDRESS_LINES[0],
+            streetAddress:
+                "2nd floor, 41/1 Kazi Nazrul Islam Avenue, Zennath Bhaban",
             addressLocality: "Dhaka",
-            postalCode: "1230",
+            postalCode: "1215",
             addressCountry: "BD",
         },
         openingHoursSpecification: [
@@ -115,9 +124,7 @@ function JsonLd() {
                 availableLanguage: ["en", "bn"],
             },
         ],
-        sameAs: [
-            // Add official profiles if available (Facebook, LinkedIn, etc.)
-        ],
+        sameAs: [],
     } as const;
 
     const breadcrumb = {
@@ -230,15 +237,19 @@ export default function ContactUsPage() {
                         </span>
                                             ))}
                                         </address>
-                                        {/* Internal hash link should use next/link */}
-                                        <Link
-                                            href="#map"
-                                            prefetch={false}
-                                            className="mt-3 inline-flex items-center gap-1 text-base font-medium text-blue-700 hover:underline"
-                                            aria-label="View address on map"
+
+
+
+                                        {/* External Google Maps link */}
+                                        <a
+                                            href={MAPS_PLACE_URL}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="mt-2 block text-base font-medium text-blue-700 hover:underline"
+                                            aria-label="Open Google Maps for directions"
                                         >
-                                            View on map <ArrowRight className="w-4 h-4" />
-                                        </Link>
+                                            Open in Google Maps
+                                        </a>
                                     </div>
                                 </div>
                             </article>
@@ -287,7 +298,9 @@ export default function ContactUsPage() {
                                         >
                                             {EMAIL}
                                         </a>
-                                        <p className="bold mt-1 text-sm text-green-800">We typically reply within one business day.</p>
+                                        <p className="bold mt-1 text-sm text-green-800">
+                                            We typically reply within one business day.
+                                        </p>
                                     </div>
                                 </div>
                             </article>
@@ -316,11 +329,11 @@ export default function ContactUsPage() {
                                 id="map"
                                 className="rounded-2xl overflow-hidden bg-white shadow-sm ring-1 ring-slate-200"
                             >
-                                {/* Fill the container width; set a responsive fixed height so the iframe fully fills it */}
+
                                 <div className="w-full h-[360px] sm:h-[420px] md:h-[480px] lg:h-[560px]">
                                     <iframe
                                         title="EMT Location Map"
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.2891234567!2d90.3912345!3d23.8756789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDUyJzMyLjQiTiA5MMKwMjMnMjguNCJF!5e0!3m2!1sen!2sbd!4v1234567890"
+                                        src={MAPS_EMBED_SRC}
                                         loading="lazy"
                                         referrerPolicy="no-referrer-when-downgrade"
                                         className="w-full h-full border-0"
@@ -328,18 +341,17 @@ export default function ContactUsPage() {
                                     />
                                 </div>
                             </div>
-                            {/* Keep the helper text below the map with consistent spacing and readable size */}
                             <p className="mt-3 text-xs sm:text-sm text-slate-500">
-                                If the map doesn't load on your network, open in{" "}
+                                If the map doesn't load on your network,{" "}
                                 <a
                                     className="font-medium text-blue-700 hover:underline"
-                                    href="https://maps.google.com"
+                                    href={MAPS_PLACE_URL}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
-                                    Google Maps
+                                    open in Google Maps
                                 </a>{" "}
-                                and search for our address.
+
                             </p>
                         </div>
                     </div>
@@ -380,7 +392,7 @@ export default function ContactUsPage() {
                                         rel="noopener noreferrer"
                                         aria-label="Open WhatsApp chat"
                                     >
-                                        <MessageSquare className="w-5 h-5" /> WhatsApp us
+                                        <MessageSquare className="w-5 h-5" /> WhatsApp
                                     </a>
                                 </div>
                             </div>

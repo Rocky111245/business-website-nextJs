@@ -9,17 +9,16 @@ import Pagination from "./Pagination";
 import catalog from "@/app/data/product-api";
 import ProductsFilterPanel from "./ProductsFilterPanel";
 
-// Derive item type straight from the single source
+
 type Product = (typeof catalog)[number];
 
-// 10–15 per page depending on viewport width
+
 function getPageSizeByWidth(w: number) {
     if (w >= 1280) return 15;
     if (w >= 768) return 12;
     return 10;
 }
 
-// ✅ Local, pure helper (replaces ProductsFilter.ts)
 function buildFilterOptions(products: ReadonlyArray<Product>) {
     const companies = new Set<string>();
     const equipmentTypes = new Set<string>();
@@ -34,18 +33,18 @@ function buildFilterOptions(products: ReadonlyArray<Product>) {
 }
 
 export default function ProductsClient() {
-    // Single source of truth
+
     const products = catalog as ReadonlyArray<Product>;
 
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    // Page from URL (fallback to 1)
+
     const pageParam = Number(searchParams.get("page") || "1");
     const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
 
-    // Hydration-safe default; becomes responsive post-mount
+
     const [pageSize, setPageSize] = useState<number>(12);
     useEffect(() => {
         const compute = () => setPageSize(getPageSizeByWidth(window.innerWidth));
@@ -54,14 +53,14 @@ export default function ProductsClient() {
         return () => window.removeEventListener("resize", compute);
     }, []);
 
-    // Filters (only Company and Equipment Type, plus Search)
+
     const [selectedCompany, setSelectedCompany] = useState<string>("All");
     const [selectedType, setSelectedType] = useState<string>("All");
     const [searchTerm, setSearchTerm] = useState<string>("");
 
     const contentTopRef = useRef<HTMLDivElement | null>(null);
 
-    // Build filter options directly from source (no inference)
+    // Build filter options directly from source
     const { companies, equipmentTypes } = useMemo(
         () => buildFilterOptions(products),
         [products]
@@ -133,7 +132,7 @@ export default function ProductsClient() {
                             <div>
                                 <h1 className="text-4xl lg:text-5xl font-bold tracking-tight">Explore Our Products</h1>
                                 <p className="my-4 text-white/90">
-                                    High-quality medical equipment from trusted manufacturers. Filter, search, and compare to find exactly what you need.
+                                    High-quality medical equipment from trusted manufacturers. Filter, search to find exactly what you need.
                                 </p>
                             </div>
                         </div>

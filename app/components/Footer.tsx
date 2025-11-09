@@ -1,8 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import {
-    FaFacebook,
-    FaLinkedin,
     FaEnvelope,
     FaPhone,
     FaMapMarkerAlt,
@@ -10,84 +8,33 @@ import {
     FaClock,
 } from "react-icons/fa";
 
-const quickLinks = [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about-us" },
-    { label: "Products", href: "/products" },
-    { label: "Contact Us", href: "/contact-us" },
-] as const;
-
-const productCategories = [
-    { label: "Ophthalmology", href: "/products" },
-    { label: "Dental Equipment", href: "/products" },
-    { label: "ICU Equipment", href: "/products" },
-    { label: "Neonatal/Pediatric", href: "/products" },
-    { label: "Nephrology", href: "/products" },
-] as const;
-
-const contactInfo = [
-    {
-        icon: FaMapMarkerAlt,
-        content: (
-            <>
-                House # 12, Road # 17, Sector # 11
-                <br />
-                Uttara, Dhaka-1230, Bangladesh
-            </>
-        ),
-    },
-    {
-        icon: FaPhone,
-        content: "+880 1713-141783 | 880 1727-072868",
-        href: "tel:+8801713141783",
-    },
-    {
-        icon: FaEnvelope,
-        content: "hasan@emtbd.com",
-        href: "mailto:hasan@emtbd.com",
-    },
-] as const;
-
-const socialLinks = [
-    {
-        name: "Facebook",
-        icon: FaFacebook,
-        href: "https://facebook.com",
-        color: "hover:bg-blue-600",
-    },
-    {
-        name: "LinkedIn",
-        icon: FaLinkedin,
-        href: "https://linkedin.com",
-        color: "hover:bg-blue-700",
-    },
-] as const;
-
 export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+        <footer
+            className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white"
+            itemScope
+            itemType="http://schema.org/Organization"
+        >
             {/* Trust Badge */}
             <div className="border-b border-slate-700">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                         <div className="flex items-center gap-3">
                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
-                                <FaHeart className="text-xl" />
+                                <FaHeart className="text-xl" aria-hidden />
                             </div>
                             <div>
                                 <p className="font-bold text-lg">Trusted Since 1982</p>
-                                <p className="text-sm text-gray-400">
-                                    35+ years serving healthcare
-                                </p>
+                                <p className="text-sm text-gray-400">40+ years serving healthcare</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-3 text-sm">
-                            <FaClock className="text-emerald-400" />
+                            <FaClock className="text-emerald-400" aria-hidden />
                             <div>
-                                <p className="font-semibold">Available Mon-Sat</p>
-                                <p className="text-gray-400">9:00 AM - 6:00 PM</p>
+                                <p className="font-semibold">Available Mon–Sat</p>
+                                <p className="text-gray-400">9:00 AM – 6:00 PM</p>
                             </div>
                         </div>
                     </div>
@@ -95,8 +42,9 @@ export default function Footer() {
             </div>
 
             {/* Main Footer Content */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6 py-8">
+                <div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 lg:[grid-template-columns:1fr_1fr_1fr_1.8fr]">
                     {/* Company Info */}
                     <div className="lg:col-span-1">
                         <div className="mb-6">
@@ -106,97 +54,143 @@ export default function Footer() {
                                     alt="EMT Logo"
                                     fill
                                     className="object-contain brightness-0 invert"
+                                    sizes="64px"
                                 />
                             </div>
-                            <h3 className="text-xl font-bold mb-2">
+                            <h3 className="text-xl font-bold mb-2" itemProp="name">
                                 Evolution Medical Technologies
                             </h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">
-                                Leading distributor of world-class bio-medical equipment in
-                                Bangladesh. Committed to excellence in healthcare technology.
+                            <p className="text-gray-400 text-sm leading-relaxed" itemProp="description">
+                                Leading distributor of world-class bio-medical equipment in Bangladesh.
+                                Committed to excellence in healthcare technology.
                             </p>
                         </div>
 
-                        {/* Social Links */}
-                        <div className="flex gap-3">
-                            {socialLinks.map(({ name, icon: Icon, href, color }) => (
-                                <a
-                                    key={name}
-                                    href={href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center transition-all duration-200 ${color} hover:scale-110`}
-                                    aria-label={name}
-                                >
-                                    <Icon className="text-lg" />
-                                </a>
-                            ))}
-                        </div>
                     </div>
 
                     {/* Quick Links */}
-                    <div>
-                        <h3 className="text-lg font-bold mb-6 text-emerald-400">
-                            Quick Links
-                        </h3>
+                    <nav aria-label="Quick links">
+                        <h3 className="text-lg font-bold mb-6 text-emerald-400">Quick Links</h3>
                         <ul className="space-y-3">
-                            {quickLinks.map(({ label, href }) => (
-                                <li key={label}>
-                                    <Link
-                                        href={href}
-                                        className="text-gray-300 hover:text-emerald-400 transition-colors inline-flex items-center gap-2 group"
-                                    >
-                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform" />
-                                        {label}
-                                    </Link>
-                                </li>
-                            ))}
+                            <li>
+                                <Link
+                                    href="/"
+                                    className="text-gray-300 hover:text-emerald-400 transition-colors inline-flex items-center gap-2 group"
+                                >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform" />
+                                    Home
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/about-us"
+                                    className="text-gray-300 hover:text-emerald-400 transition-colors inline-flex items-center gap-2 group"
+                                >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform" />
+                                    About Us
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/products"
+                                    className="text-gray-300 hover:text-emerald-400 transition-colors inline-flex items-center gap-2 group"
+                                >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform" />
+                                    Products
+                                </Link>
+                            </li>
+                            <li>
+                                <Link
+                                    href="/contact-us"
+                                    className="text-gray-300 hover:text-emerald-400 transition-colors inline-flex items-center gap-2 group"
+                                >
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform" />
+                                    Contact Us
+                                </Link>
+                            </li>
                         </ul>
-                    </div>
+                    </nav>
 
-                    {/* Product Categories */}
-                    <div>
-                        <h3 className="text-lg font-bold mb-6 text-cyan-400">
-                            Product Categories
-                        </h3>
-                        <ul className="space-y-3">
-                            {productCategories.map(({ label, href }) => (
-                                <li key={label}>
-                                    <Link
-                                        href={href}
-                                        className="text-gray-300 hover:text-cyan-400 transition-colors inline-flex items-center gap-2 group"
-                                    >
-                                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 group-hover:scale-150 transition-transform" />
-                                        {label}
-                                    </Link>
-                                </li>
-                            ))}
+                    {/* Product Categories (display only, no links) */}
+                    <section aria-label="Product categories">
+                        <h3 className="text-lg font-bold mb-6 text-cyan-400">Product Categories</h3>
+                        <ul className="list-none m-0 p-0 space-y-3">
+                            <li className="flex items-center gap-2 text-gray-300">
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                                Ophthalmology
+                            </li>
+                            <li className="flex items-center gap-2 text-gray-300">
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                                Dental Equipment
+                            </li>
+                            <li className="flex items-center gap-2 text-gray-300">
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                                ICU Equipment
+                            </li>
+                            <li className="flex items-center gap-2 text-gray-300">
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                                Nephrology
+                            </li>
+                            <li className="flex items-center gap-2 text-gray-300">
+                                <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+                                Neonatal/Pediatric
+                            </li>
                         </ul>
-                    </div>
+                    </section>
 
-                    {/* Contact Info */}
-                    <div>
-                        <h3 className="text-lg font-bold mb-6 text-emerald-400">
-                            Contact Us
-                        </h3>
-                        <ul className="space-y-4">
-                            {contactInfo.map(({ icon: Icon, content, href }, index) => (
-                                <li key={index} className="flex items-start gap-3">
-                                    <Icon className="text-emerald-400 mt-1 flex-shrink-0" />
-                                    {href ? (
-                                        <a
-                                            href={href}
-                                            className="text-gray-300 hover:text-emerald-400 transition-colors text-sm"
-                                        >
-                                            {content}
-                                        </a>
-                                    ) : (
-                                        <span className="text-gray-300 text-sm">{content}</span>
-                                    )}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+
+                    {/* Contact Info (wider + phone on one line) */}
+                    <section aria-label="Contact information" className="lg:pl-4 xl:pl-6">
+                        <h3 className="text-lg font-bold mb-6 text-emerald-400">Contact Us</h3>
+                        <address
+                            className="not-italic space-y-4"
+                            itemProp="address"
+                            itemScope
+                            itemType="http://schema.org/PostalAddress"
+                        >
+                            <div className="flex items-start gap-3">
+                                <FaMapMarkerAlt className="text-emerald-400 mt-1 flex-shrink-0" aria-hidden />
+                                <span className="text-gray-300 text-sm" itemProp="streetAddress">
+                  House # 12, Road # 17, Sector # 11<br />
+                  <span itemProp="addressLocality">Uttara</span>,{" "}
+                                    <span itemProp="addressRegion">Dhaka</span>-1230,{" "}
+                                    <span itemProp="addressCountry">Bangladesh</span>
+                </span>
+                            </div>
+
+                            <div className="flex items-start gap-3">
+                                <FaPhone className="text-emerald-400 mt-1 flex-shrink-0" aria-hidden />
+                                <div className="flex items-center gap-3 whitespace-nowrap">
+                                    <a
+                                        href="tel:+8801713141783"
+                                        className="text-gray-300 hover:text-emerald-400 transition-colors text-sm"
+                                        itemProp="telephone"
+                                    >
+                                        +880 1713-141783
+                                    </a>
+                                    <span className="text-gray-500">|</span>
+                                    <a
+                                        href="tel:+8801727072868"
+                                        className="text-gray-300 hover:text-emerald-400 transition-colors text-sm"
+                                        itemProp="telephone"
+                                    >
+                                        +880 1727-072868
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="flex items-start gap-3">
+                                <FaEnvelope className="text-emerald-400 mt-1 flex-shrink-0" aria-hidden />
+                                <a
+                                    href="mailto:hasan@emtbd.com"
+                                    className="text-gray-300 hover:text-emerald-400 transition-colors text-sm"
+                                    itemProp="email"
+                                >
+                                    hasan@emtbd.com
+                                </a>
+                            </div>
+                        </address>
+                    </section>
                 </div>
             </div>
 
@@ -205,12 +199,8 @@ export default function Footer() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
                     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-400">
                         <p>
-                            &copy; {currentYear} Evolution Medical Technologies. All rights
-                            reserved.
-                        </p>
-                        <p className="text-xs">
-                            Built with <FaHeart className="inline text-red-500 text-xs" /> for
-                            better healthcare
+                            &copy; <time dateTime={`${currentYear}`}>{currentYear}</time>{" "}
+                            <span itemProp="name">Evolution Medical Technologies</span>. All rights reserved.
                         </p>
                     </div>
                 </div>
