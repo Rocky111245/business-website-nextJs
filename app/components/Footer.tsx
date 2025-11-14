@@ -169,11 +169,11 @@ export default function Footer() {
                                 <FaPhone className="text-emerald-400 mt-1 flex-shrink-0" aria-hidden />
                                 <div className="flex items-center gap-3 whitespace-nowrap">
                                     <a
-                                        href="tel:+8801713141783"
+                                        href="tel:+8801713013770"
                                         className="text-gray-300 hover:text-emerald-400 transition-colors text-sm"
                                         itemProp="telephone"
                                     >
-                                        +880 1713-141783
+                                        +880 1713-013770
                                     </a>
                                     <span className="text-gray-500">|</span>
                                     <a

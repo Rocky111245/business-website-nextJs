@@ -31,13 +31,13 @@ export default function Navbar() {
                         </div>
                         <div className="flex items-center gap-6">
                             <a
-                                href="tel:+8801713141783"
+                                href="tel:+8801727072868"
                                 className="flex items-center gap-2 hover:text-emerald-300 transition-colors group"
                             >
                 <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
                   <Phone className="w-4 h-4" />
                 </span>
-                                <span className="font-semibold">+880 1713-141783</span>
+                                <span className="font-semibold">+880 1727-072868</span>
                             </a>
                             <a
                                 href="mailto:hasan@emtbd.com"
