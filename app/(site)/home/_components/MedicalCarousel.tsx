@@ -28,7 +28,6 @@ export default function MedicalCarousel() {
 
     return (
         <section className="relative w-full overflow-hidden bg-slate-50 py-16 lg:py-10">
-            {/* subtle background pattern + gradient */}
             <div className="pointer-events-none absolute inset-0 opacity-30">
                 <svg className="absolute top-0 left-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
                     <pattern id="ecg" x="0" y="0" width="160" height="80" patternUnits="userSpaceOnUse">
@@ -40,7 +39,6 @@ export default function MedicalCarousel() {
             </div>
 
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
-                {/* ---------- Text block ---------- */}
                 <div className="space-y-6">
                     <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-cyan-100 text-cyan-800 rounded-full text-base font-semibold">
                         <HeartPulse className="w-5 h-5" />

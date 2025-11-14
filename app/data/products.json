@@ -587,7 +587,7 @@
     "productLink": "https://i1.wp.com/nts-bd.net/wp-content/uploads/2021/07/TRC_NW400_2903f579d1658bd6b0b766738b6af59c.jpg?resize=400%2C284&ssl=1",
     "name": "TRC-NW500",
     "description": "Non-mydriatic Retinal Camera",
-    "brochure": "https://nts-bd.net/wp-content/uploads/2021/08/RM-800_Brochure.pdf",
+    "brochure": "https://ik.imagekit.io/emtbd/emt_images/Brochures/M000111A-4AD_NW500_Brochure_APAC_EN_240305_c.pdf?updatedAt=1763094294584",
     "company": "Topcon",
     "equipmentType": "Retinal Camera"
   },
@@ -624,22 +624,6 @@
     "equipmentType": "Vision Tester"
   },
   {
-    "productLink": "https://ik.imagekit.io/emtbd/emt_images/images/DIANOVA-2.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1674424780918",
-    "name": "Dianova HD X1",
-    "description": "Hemodialysis Machine",
-    "brochure": "https://nts-bd.net/wp-content/uploads/2021/08/RM-800_Brochure.pdf",
-    "company": "DiaLife",
-    "equipmentType": "Haemodialysis Machine"
-  },
-  {
-    "productLink": "https://ik.imagekit.io/emtbd/emt_images/images/DIA-LS-HP-1.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1674424780855",
-    "name": "DIA LX/HX 14/18/20/22",
-    "description": "Dialyzer",
-    "brochure": "https://nts-bd.net/wp-content/uploads/2021/08/RM-800_Brochure.pdf",
-    "company": "DiaLife",
-    "equipmentType": "Dialyzer"
-  },
-  {
     "productLink": "https://ik.imagekit.io/emtbd/emt_images/images/L5B9770_Dianeal_highres_Lot___Expiry_Removed_v2.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1674424781546",
     "name": "CAPD Fluid 1.5% / 2.5% / 4.25%",
     "description": "Peritoneal Dialysis Solution",
@@ -658,7 +642,6 @@
     "productLink": "https://ik.imagekit.io/emtbd/emt_images/images/Dialysis_Utilities.webp?ik-sdk-version=javascript-1.4.3&updatedAt=1674470575086",
     "name": "Dialysis Utilities",
     "description": "Dialysis Consumables",
-    "brochure": "https://nts-bd.net/wp-content/uploads/2021/08/RM-800_Brochure.pdf",
     "company": "Baxter",
     "equipmentType": "Dialysis Consumable"
   },
@@ -666,7 +649,6 @@
     "productLink": "https://ik.imagekit.io/emtbd/emt_images/images/6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674425817236",
     "name": "ALFA Air 3 ENT",
     "description": "ENT Surgical Microscope",
-    "brochure": "https://www.seilermicro.com/wp-content/uploads/sites/2/2019/02/Alpha_Air_3_ENT_Manual_MED8009_Rev_3_2.1.19.pdf",
     "company": "Seiler Medical",
     "equipmentType": "ENT Surgical Microscope"
   },
@@ -674,7 +656,6 @@
     "productLink": "https://ik.imagekit.io/emtbd/emt_images/images/6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674425817236",
     "name": "ALFA Air 6 ENT",
     "description": "ENT Surgical Microscope",
-    "brochure": "https://www.seilermicro.com/wp-content/uploads/sites/2/2019/02/Alpha_Air_6_ENT_Manual_MED8010_Rev_3_2.1.19.pdf",
     "company": "Seiler Medical",
     "equipmentType": "ENT Surgical Microscope"
   },
@@ -682,7 +663,6 @@
     "productLink": "https://ik.imagekit.io/emtbd/emt_images/images/6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674425817236",
     "name": "ALFA SLIM 3",
     "description": "Dental Microscope (3-step)",
-    "brochure": "https://www.seilermicro.com/wp-content/uploads/2020/12/Alpha-Slim-3_DENTAL_Manual_MED8003_rev_6_11.24.20.pdf",
     "company": "Seiler Medical",
     "equipmentType": "Dental Microscope"
   },
@@ -690,7 +670,6 @@
     "productLink": "https://ik.imagekit.io/emtbd/emt_images/images/6.png?ik-sdk-version=javascript-1.4.3&updatedAt=1674425817236",
     "name": "ALFA SLIM 6",
     "description": "Dental Microscope (6-step)",
-    "brochure": "https://www.seilermicro.com/wp-content/uploads/sites/2/2019/01/Alpha_Slim_Dental_Specs_MED8006_rev_1_1.31.19_small.pdf",
     "company": "Seiler Medical",
     "equipmentType": "Dental Microscope"
   },

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Activity, Users, Award, Landmark, Wrench } from "lucide-react";
-import {abril, bebas, cinzel, cormorant, dmserif, montAlt, oswald, playfair} from "@/app/components/fonts";
+import {playfair} from "@/app/components/fonts";
 
 export default function HeroVariation() {
     return (
@@ -64,8 +64,8 @@ export default function HeroVariation() {
                         <div className="space-y-3 text-slate-700">
                             <p className="text-xl leading-relaxed">
                                 We are one of Bangladesh’s oldest biomedical distributors, active since 1982.
-                                Evolution Medical Technologies focuses on bio-medical devices, while our sister
-                                company concentrates on specialized pharmaceuticals.
+                                Evolution Medical Technologies Ltd focuses on bio-medical devices, while our sister
+                                company, National Trading Syndicate Ltd. concentrates on specialized pharmaceuticals.
                             </p>
                             <p className="text-lg leading-relaxed text-slate-600">
                                 We maintain a nationwide sales network and a trained service team—supporting

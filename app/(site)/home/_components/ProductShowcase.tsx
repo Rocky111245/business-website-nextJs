@@ -16,14 +16,12 @@ type Product = {
 };
 
 export default function ProductShowcase() {
-    // Compute product list first - this is always executed
     const productList = useMemo(() => {
         return (products as unknown as Product[])
             .filter(p => p?.name && p.productLink)
             .slice(0, 15);
     }, []);
 
-    // Hooks must be called unconditionally at the top level
     const [idx, setIdx] = useState(0);
     const [pause, setPause] = useState(false);
     const wrapRef = useRef<HTMLDivElement>(null);

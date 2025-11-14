@@ -44,8 +44,7 @@ export default function MissionVisionShowcase() {
                                 Be the most reliable and committed partner
                             </h3>
                             <p className="mt-2 text-slate-700 leading-relaxed text-base sm:text-lg max-w-prose">
-                                We deliver quality medical equipment and attentive service that clinicians trust, patients feel,
-                                and administrators rely on—on time, every time.
+                                To bring the latest medical technologies to Bangladesh, providing reliable distribution, exceptional after-sales service, and building lasting partnerships with healthcare providers.
                             </p>
                         </div>
                         {/* Image */}
@@ -86,7 +85,7 @@ export default function MissionVisionShowcase() {
                                 Lead biomedical distribution in Bangladesh
                             </h3>
                             <p className="mt-2 text-slate-700 leading-relaxed text-base sm:text-lg max-w-prose">
-                                Set the benchmark for availability, support, and education—accelerating access to safe, modern care nationwide.
+                                To be Bangladesh's most trusted biomedical equipment distributor, recognized for excellence in medical technology solutions and customer service.
                             </p>
                         </div>
                     </article>

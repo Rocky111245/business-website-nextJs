@@ -99,6 +99,13 @@ export default function Footer() {
                                     Products
                                 </Link>
                             </li>
+                            <Link
+                                href="/medical-blogs"
+                                className="text-gray-300 hover:text-emerald-400 transition-colors inline-flex items-center gap-2 group"
+                            >
+                                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 group-hover:scale-150 transition-transform" />
+                                Medical Blogs
+                            </Link>
                             <li>
                                 <Link
                                     href="/contact-us"

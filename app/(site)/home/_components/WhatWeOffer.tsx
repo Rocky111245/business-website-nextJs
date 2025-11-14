@@ -23,13 +23,13 @@ export function WhatWeOffer() {
                 <p className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sky-100 text-sky-800 text-sm sm:text-base font-medium">What We Offer</p>
                 <h2 id="offer-title" className="mt-3 text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 leading-tight">Simple, reliable support with a focus on outcomes</h2>
             </header>
-            <ul className="space-y-4">
+            <ul className="space-y-6">
                 {bullets.map((b) => (
-                    <li key={b.title} className="flex gap-3">
+                    <li key={b.title} className="text-xl flex gap-3">
                         <span className="mt-1 shrink-0 text-sky-600"><CheckCircle2 className="w-5 h-5" /></span>
                         <div>
                             <p className="font-semibold text-slate-900">{b.title}</p>
-                            <p className="text-slate-600 text-sm mt-0.5">{b.desc}</p>
+                            <p className="text-slate-600 text-lg mt-0.5">{b.desc}</p>
                         </div>
                     </li>
                 ))}

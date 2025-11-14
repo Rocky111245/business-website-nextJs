@@ -5,7 +5,7 @@ import ProductsClient from "@/app/(site)/products/_components/ProductsClient";
 
 /** ---- Site constants ---- */
 const SITE_NAME = "Evolution Medical Technologies";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://emtbd.com"; // set in .env for accuracy
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://emtbd.com";
 const PATH = "/products";
 const PAGE_URL = `${SITE_URL}${PATH}`;
 

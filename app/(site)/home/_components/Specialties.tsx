@@ -1,17 +1,9 @@
 "use client";
-
-
 // ========================= File: components/Specialties.tsx =========================
 import React from "react";
 import { Eye, Syringe, Activity, ShieldAlert, Droplet } from "lucide-react";
 
 
-/**
- * Specialties (full-width rows)
- * - Modern, larger, sleek icon chips (no playful/babyish glyphs)
- * - Neutral typography, strong contrast
- * - Each item spans container width; great for scanning
- */
 export function Specialties() {
     const items: { label: string; icon: React.ElementType; accent: string }[] = [
         { icon: Eye, label: "Ophthalmology", accent: "from-indigo-600 to-sky-500" },
