@@ -15,7 +15,7 @@ export const metadata: Metadata = {
         title: "About Us | Evolution Medical Technologies",
         description:
             "Bangladesh's premier biomedical equipment distributor since 1982. Ophthalmology, nephrology, ICU, dental & neonatal solutions.",
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || ""}/about-us`,
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://emtbd.com"}/about-us`,
         type: "website",
         siteName: "Evolution Medical Technologies",
     },

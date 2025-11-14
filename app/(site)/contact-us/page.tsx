@@ -9,7 +9,7 @@ import type { Metadata } from "next";
  * ----------
  */
 const SITE_NAME = "Evolution Medical Technologies";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://emtbd.com";
 const CONTACT_PATH = "/contact-us";
 
 const EMAIL = "hasan@emtbd.com" as const;
