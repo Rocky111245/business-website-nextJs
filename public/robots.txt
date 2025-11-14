@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://emtbd.com
+
+# Sitemaps
+Sitemap: https://emtbd.com/sitemap.xml

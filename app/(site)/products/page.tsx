@@ -9,13 +9,24 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://emtbd.com";
 const PATH = "/products";
 const PAGE_URL = `${SITE_URL}${PATH}`;
 
+// app/(site)/products/page.tsx
 export const metadata: Metadata = {
     metadataBase: new URL(SITE_URL),
     title: {
-        absolute: `Products – Medical Equipment | ${SITE_NAME}`,
+        absolute: `Medical Equipment Products - Baxter, Topcon & More | ${SITE_NAME}`,
     },
     description:
-        "Browse our catalog of medical equipment across specialties including ophthalmology, dental, ICU, neonatal/pediatric, nephrology and more.",
+        "Leading medical equipment supplier in Bangladesh. Authorized distributor of Baxter dialysis machines, Topcon ophthalmology equipment, ICU, neonatal & dental products. Formerly National Trading Syndicate (NTS Bangladesh).",
+    keywords: [
+        "medical equipment bangladesh",
+        "Baxter dialysis fluid bangladesh",
+        "Topcon products bangladesh",
+        "National Trading Syndicate",
+        "NTS Bangladesh",
+        "dialysis machine bangladesh",
+        "ophthalmology equipment bangladesh",
+        "medical supplies dhaka",
+    ],
     alternates: {
         canonical: PAGE_URL,
     },
@@ -23,15 +34,15 @@ export const metadata: Metadata = {
         type: "website",
         url: PAGE_URL,
         siteName: SITE_NAME,
-        title: `Products – Medical Equipment | ${SITE_NAME}`,
+        title: `Medical Equipment - Baxter, Topcon | ${SITE_NAME}`,
         description:
-            "Explore our full range of medical equipment categories, specs, and brochures.",
+            "Authorized distributor of Baxter dialysis equipment, Topcon ophthalmology devices & premium medical products in Bangladesh. Formerly NTS Bangladesh.",
     },
     twitter: {
         card: "summary_large_image",
-        title: `Products – Medical Equipment | ${SITE_NAME}`,
+        title: `Medical Equipment - Baxter, Topcon | ${SITE_NAME}`,
         description:
-            "Explore our full range of medical equipment categories, specs, and brochures.",
+            "Premium medical equipment supplier in Bangladesh. Baxter, Topcon & more.",
     },
     robots: {
         index: true,
