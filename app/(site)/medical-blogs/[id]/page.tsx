@@ -6,6 +6,14 @@ import { blogPosts } from "../_components/blogData";
 
 type Props = { params: Promise<{ id: string }> };
 
+// ADD THIS FUNCTION:
+export async function generateStaticParams() {
+    return blogPosts.map((post) => ({
+        id: post.id,
+    }));
+}
+
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { id } = await params;
     const post = blogPosts.find((p) => String(p.id) === String(id));
