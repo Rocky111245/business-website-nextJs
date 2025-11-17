@@ -31,7 +31,7 @@ export default function HeroVariation() {
             />
 
             {/* Content */}
-            <div className="relative z-10 container mx-auto px-2 sm:px-4 lg:px-8 py-10 lg:py-5">
+            <div className="relative z-10 container mx-auto px-2 sm:px-4 lg:px-8 py-8 lg:py-6 my-3">
                 <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[80vh]">
                     {/* Left Content */}
                     <div className="space-y-8 animate-fade-in">

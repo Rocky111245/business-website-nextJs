@@ -15,44 +15,6 @@ export default function Navbar() {
 
     return (
         <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-lg">
-            {/* Top Info Bar */}
-            <div className="bg-gradient-to-r from-slate-900 via-blue-900 to-emerald-900 text-white">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between py-3 text-sm">
-                        <div className="flex items-center gap-6">
-                            <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-full border border-white/20">
-                                <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                                <span className="font-semibold">Since 1982</span>
-                            </div>
-                            <div className="hidden lg:flex items-center gap-2 text-blue-200">
-                                <MapPin className="w-4 h-4" />
-                                <span>Leading Medical Equipment Distributor in Bangladesh</span>
-                            </div>
-                        </div>
-                        <div className="flex items-center gap-6">
-                            <a
-                                href="tel:+8801727072868"
-                                className="flex items-center gap-2 hover:text-emerald-300 transition-colors group"
-                            >
-                <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
-                  <Phone className="w-4 h-4" />
-                </span>
-                                <span className="font-semibold">+880 1727-072868</span>
-                            </a>
-                            <a
-                                href="mailto:hasan@emtbd.com"
-                                className="hidden sm:flex items-center gap-2 hover:text-emerald-300 transition-colors group"
-                            >
-                <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-emerald-500/30 transition-colors">
-                  <Mail className="w-4 h-4" />
-                </span>
-                                <span>hasan@emtbd.com</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             {/* Main Navigation */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-24">
